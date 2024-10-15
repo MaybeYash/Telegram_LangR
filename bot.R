@@ -6,7 +6,10 @@ bot <- Bot(token = bot_token)
 source("modules/update.R")
 
 start_handler <- function(bot, update) {
-  bot$sendMessage(chat_id = update$message$chat_id, text = sprintf("Hello %s!", update$message$from$first_name))
+  user_name <- update$message$from$first_name
+  user_id <- update$message$from$id
+  message_text <- sprintf("Hello %s [%d] !", user_name, user_id)
+  bot$sendMessage(chat_id = update$message$chat_id, text = message_text)
 }
 
 updater <- Updater(token = bot_token)
