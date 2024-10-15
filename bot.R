@@ -5,7 +5,6 @@ bot <- Bot(token = bot_token)
 
 source("modules/update.R")
 source("modules/ping.R")
-source("modules/check.R")
 source("modules/brute_force.R")
 
 start_handler <- function(bot, update) {
@@ -18,7 +17,6 @@ updater <- Updater(token = bot_token)
 updater <- updater + CommandHandler("start", start_handler)
 updater <- updater + CommandHandler("update", update_handler)
 updater <- updater + CommandHandler("ping", ping_handler)
-updater <- updater + CommandHandler("check", check_handler)
 updater <- updater + CommandHandler("brute_force", brute_force_command_handler)
 
 updater <- updater + CallbackQueryHandler(run_brute_force_callback, pattern = "run_brute_force")
