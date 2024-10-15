@@ -1,6 +1,6 @@
 library(telegram.bot)
 
-bot_token <- "YOUR_BOT_API_TOKEN"
+bot_token <- "7855855349:AAHxzMPx1Ggk0kba97ryJ06l3NG8M98E0fc"
 bot <- Bot(token = bot_token)
 
 start_handler <- function(bot, update) {
