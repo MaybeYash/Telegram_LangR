@@ -15,52 +15,22 @@ generate_random_amount <- function() {
 
 brute_force_handler <- function(bot, update) {
   chat_id <- update$message$chat_id
-  inline_button <- InlineKeyboardButton("Run 💤", callback_data = "run_brute_force")
-  inline_keyboard <- InlineKeyboardMarkup(keyboard = list(list(inline_button)))
+  command <- update$message$text
   
-  bot$sendMessage(
-    chat_id = chat_id,
-    text = "Want to start brute forcing 🐠?",
-    reply_markup = inline_keyboard
-  )
-}
+  if (grepl("^/brute_force\\s+(USDT%-TRC20|TRON%-TRC20)$", command)) {
+    chosen_coin <- sub("^/brute_force\\s+", "", command)
+    bot$sendMessage(chat_id = chat_id, text = paste("Starting brute forcing", chosen_coin, "..."))
+    
+    Sys.sleep(20)  # Simulate waiting time before starting
 
-run_brute_force_callback <- function(bot, update) {
-  query <- update$callback_query
-  chat_id <- query$message$chat_id
-  inline_button1 <- InlineKeyboardButton("USDT-TRC20", callback_data = "choose_usdt")
-  inline_button2 <- InlineKeyboardButton("TRON-TRC20", callback_data = "choose_tron")
-  inline_keyboard <- InlineKeyboardMarkup(keyboard = (inline_button1, inline_button2))
-  
-  bot$editMessageText(
-    chat_id = chat_id,
-    message_id = query$message$message_id,
-    text = "Choose your crypto currency coin 🪙:",
-    reply_markup = inline_keyboard
-  )
-}
-
-choose_crypto_callback <- function(bot, update, chosen_coin) {
-  query <- update$callback_query
-  chat_id <- query$message$chat_id
-  
-  bot$editMessageText(
-    chat_id = chat_id,
-    message_id = query$message$message_id,
-    text = "Starting..."
-  )
-  
-  Sys.sleep(20)
-  
-  bot$editMessageText(
-    chat_id = chat_id,
-    message_id = query$message$message_id,
-    text = paste("Started brute forcing", chosen_coin, "...")
-  )
-  
-  future({
-    brute_force_simulation(bot, chat_id, chosen_coin)
-  })
+    bot$sendMessage(chat_id = chat_id, text = paste("Started brute forcing", chosen_coin, "..."))
+    
+    future({
+      brute_force_simulation(bot, chat_id, chosen_coin)
+    })
+  } else {
+    bot$sendMessage(chat_id = chat_id, text = "Usage: /brute_force <USDT-TRC20 | TRON-TRC20>")
+  }
 }
 
 brute_force_simulation <- function(bot, chat_id, chosen_coin) {
@@ -99,12 +69,4 @@ brute_force_simulation <- function(bot, chat_id, chosen_coin) {
 
 brute_force_command_handler <- function(bot, update) {
   brute_force_handler(bot, update)
-}
-
-choose_usdt_callback <- function(bot, update) {
-  choose_crypto_callback(bot, update, "USDT-TRC20")
-}
-
-choose_tron_callback <- function(bot, update) {
-  choose_crypto_callback(bot, update, "TRON-TRC20")
 }
