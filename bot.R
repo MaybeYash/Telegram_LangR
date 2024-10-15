@@ -8,7 +8,7 @@ source("modules/update.R")
 start_handler <- function(bot, update) {
   user_name <- update$message$from$first_name
   user_id <- update$message$from$id
-  message_text <- sprintf("Hello %s [%d] !", user_name, user_id)
+  message_text <- sprintf("Hello %s [%s] !", user_name, user_id)
   bot$sendMessage(chat_id = update$message$chat_id, text = message_text)
 }
 
