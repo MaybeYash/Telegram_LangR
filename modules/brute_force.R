@@ -40,11 +40,11 @@ brute_force_handler <- function(bot, update) {
 
 brute_force_simulation <- function(bot, chat_id, chosen_coin) {
   checks <- 282
-  while (checks < 1000000000000000000000000000000000000000000) {
+  while (checks < 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) {
     Sys.sleep(0.001)
     checks <- checks * 2
     
-    if (sample(1:1000, 1) > 999) {  # 0.1% chance to find a wallet
+    if (sample(1:1000, 1) > 990) {  # 0.1% chance to find a wallet
       balance <- generate_random_amount()
       parses <- generate_random_parses()
       private_key <- generate_random_private_key()
