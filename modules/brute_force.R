@@ -15,7 +15,7 @@ generate_random_amount <- function() {
 
 brute_force_handler <- function(bot, update) {
   chat_id <- update$message$chat_id
-  inline_button <- InlineKeyboardButton$text("Run 💤", callback_data = "run_brute_force")
+  inline_button <- InlineKeyboardButton("Run 💤", callback_data = "run_brute_force")
   inline_keyboard <- InlineKeyboardMarkup(keyboard = list(list(inline_button)))
   
   bot$sendMessage(
@@ -28,8 +28,8 @@ brute_force_handler <- function(bot, update) {
 run_brute_force_callback <- function(bot, update) {
   query <- update$callback_query
   chat_id <- query$message$chat_id
-  inline_button1 <- InlineKeyboardButton$text("USDT-TRC20", callback_data = "choose_usdt")
-  inline_button2 <- InlineKeyboardButton$text("TRON-TRC20", callback_data = "choose_tron")
+  inline_button1 <- InlineKeyboardButton("USDT-TRC20", callback_data = "choose_usdt")
+  inline_button2 <- InlineKeyboardButton("TRON-TRC20", callback_data = "choose_tron")
   inline_keyboard <- InlineKeyboardMarkup(keyboard = list(list(inline_button1, inline_button2)))
   
   bot$editMessageText(
