@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN R -e "install.packages('remotes', repos='http://cran.rstudio.com/')"
 RUN R -e "remotes::install_github('ebeneditos/telegram.bot')"
+RUN R -e "install.packages('future', repos='http://cran.rstudio.com/')"
 
 WORKDIR /app
 COPY . .
