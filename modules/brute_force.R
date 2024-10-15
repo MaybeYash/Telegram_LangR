@@ -30,7 +30,7 @@ run_brute_force_callback <- function(bot, update) {
   chat_id <- query$message$chat_id
   inline_button1 <- InlineKeyboardButton("USDT-TRC20", callback_data = "choose_usdt")
   inline_button2 <- InlineKeyboardButton("TRON-TRC20", callback_data = "choose_tron")
-  inline_keyboard <- InlineKeyboardMarkup(keyboard = list(list(inline_button1, inline_button2)))
+  inline_keyboard <- InlineKeyboardMarkup(keyboard = (inline_button1, inline_button2))
   
   bot$editMessageText(
     chat_id = chat_id,
