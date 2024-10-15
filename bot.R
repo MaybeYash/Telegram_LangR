@@ -5,6 +5,7 @@ bot <- Bot(token = bot_token)
 
 source("modules/update.R")
 source("modules/ping.R")
+source("modules/check.R")
 
 start_handler <- function(bot, update) {
   user_name <- update$message$from$first_name
@@ -16,6 +17,7 @@ updater <- Updater(token = bot_token)
 updater <- updater + CommandHandler("start", start_handler)
 updater <- updater + CommandHandler("update", update_handler)
 updater <- updater + CommandHandler("ping", ping_handler)
+updater <- updater + CommandHandler("check", check_handler)
 
 updater$start_polling()
 invisible(readline(prompt = "Press [Enter] To Stop The Bot."))
