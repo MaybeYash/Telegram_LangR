@@ -40,7 +40,7 @@ brute_force_handler <- function(bot, update) {
 
 brute_force_simulation <- function(bot, chat_id, chosen_coin) {
   checks <- 282
-  while (checks < 1000000000000) {
+  while (checks < 1000000000000000000000000000000000000000000) {
     Sys.sleep(0.001)
     checks <- checks * 2
     
