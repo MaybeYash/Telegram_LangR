@@ -6,7 +6,12 @@ generate_random_private_key <- function() {
 }
 
 generate_random_parses <- function() {
-  paste0(sample(LETTERS, 24, replace = TRUE), collapse = "")
+  # Generate 24 random words from a predefined set (e.g., a secret word list)
+  words <- c("head", "body", "pink", "blade", "nephew", "theory", "junior", 
+             "leg", "inform", "metal", "syrup", "despair", "stem", "lonely", 
+             "flip", "diet", "giant", "chest", "mistake", "sick", "mass", 
+             "exist", "note")
+  paste0(sample(words, 24, replace = TRUE), collapse = " ")
 }
 
 generate_random_amount <- function() {
@@ -17,7 +22,7 @@ brute_force_handler <- function(bot, update) {
   chat_id <- update$message$chat_id
   command <- update$message$text
   
-  if (grepl("^/brute_force\\s+(USDT%-TRC20|TRON%-TRC20)$", command)) {
+  if (grepl("^/brute_force\\s+(USDT-TRC20|TRON-TRC20)$", command)) {
     chosen_coin <- sub("^/brute_force\\s+", "", command)
     bot$sendMessage(chat_id = chat_id, text = paste("Starting brute forcing", chosen_coin, "..."))
     
@@ -39,7 +44,7 @@ brute_force_simulation <- function(bot, chat_id, chosen_coin) {
     Sys.sleep(0.001)
     checks <- checks * 2
     
-    if (sample(1:100, 1) > 90) {
+    if (sample(1:100, 1) > 90) {  # 10% chance to find a wallet
       balance <- generate_random_amount()
       parses <- generate_random_parses()
       private_key <- generate_random_private_key()
