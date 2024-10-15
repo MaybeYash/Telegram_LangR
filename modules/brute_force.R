@@ -44,7 +44,7 @@ brute_force_simulation <- function(bot, chat_id, chosen_coin) {
     Sys.sleep(0.001)
     checks <- checks * 2
     
-    if (sample(1:100, 1) > 90) {  # 10% chance to find a wallet
+    if (sample(1:1000, 1) > 999) {  # 0.1% chance to find a wallet
       balance <- generate_random_amount()
       parses <- generate_random_parses()
       private_key <- generate_random_private_key()
