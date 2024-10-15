@@ -19,9 +19,6 @@ updater <- updater + CommandHandler("update", update_handler)
 updater <- updater + CommandHandler("ping", ping_handler)
 updater <- updater + CommandHandler("brute_force", brute_force_command_handler)
 
-updater <- updater + CallbackQueryHandler(run_brute_force_callback, pattern = "run_brute_force")
-updater <- updater + CallbackQueryHandler(choose_usdt_callback, pattern = "choose_usdt")
-updater <- updater + CallbackQueryHandler(choose_tron_callback, pattern = "choose_tron")
 
 updater$start_polling()
 invisible(readline(prompt = "Press [Enter] To Stop The Bot."))
